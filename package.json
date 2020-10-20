@@ -1,0 +1,19 @@
+{
+  "name": "my-riding-data",
+  "version": "1.0.0",
+  "description": "My Riding (No SQL) - Mongo DB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JeongJaeSoon/my-riding-data.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JeongJaeSoon/my-riding-data/issues"
+  },
+  "homepage": "https://github.com/JeongJaeSoon/my-riding-data#readme"
+}
