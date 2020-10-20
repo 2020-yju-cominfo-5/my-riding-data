@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/JeongJaeSoon/my-riding-data/issues"
   },
-  "homepage": "https://github.com/JeongJaeSoon/my-riding-data#readme"
+  "homepage": "https://github.com/JeongJaeSoon/my-riding-data#readme",
+  "dependencies": {
+    "nunjucks": "^3.2.2"
+  }
 }

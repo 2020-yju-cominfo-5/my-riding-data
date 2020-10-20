@@ -139,3 +139,20 @@ My Riding (No SQL) - Mongo DB
   ```bash
   db.users.remove({ name: "nero" })
   ```
+
+# 몽고 DB 연결하기
+### mongoose 설치
+- express 를 통하여 설치
+  ```bash
+  npm i -g express-generator
+  express learn-mongoose --view=pug
+  cd learn-mongoose && npm i
+  ```
+
+### mongoose 연결 설정
+- 주소형식 (`[]` 부분은 없어도 됨)
+  
+  `mongodb://[username:password@]host[:port][/[database][?options]]`
+
+- `schemas/index.js`
+  
