@@ -7,38 +7,52 @@ const {
 const drivingRecordSchema = new Schema({
   drivingId: {
     type: Number,
+    unique: true,
     required: true,
   },
-  userId: {
-    type: Number,
+  records: {
+    type: [
+      {
+        date: {
+          type: Date,
+          required: true,
+        },
+        record: {
+          type: Object,
+          properties: {
+            latitude: {
+              type: Number,
+              required: true,
+            },
+            longitude: {
+              type: Number,
+              required: true,
+            },
+            altitude: {
+              type: Number,
+              required: true,
+            },
+            speed: {
+              type: Number,
+              required: true,
+            },
+            drivingDistance: {
+              type: Number,
+              required: true,
+            },
+            angleDirection: {
+              type: Number,
+              required: true,
+            },
+          },
+        },
+      },
+    ],
     required: true,
   },
-  date: {
-    type: Number,
-    required: true,
-  },
-  latitude: {
-    type: Number,
-    required: true,
-  },
-  longitude: {
-    type: Number,
-    required: true,
-  },
-  altitude: {
-    type: Number,
-    required: true,
-  },
-  speed: {
-    type: Number,
-    required: true,
-  },
-  drivingDistance: {
-    type: Number,
-    required: true,
-  },
-  angleDirection: {
-    type: Number,
+  createdAt: {
+    type: Date,
+    default: Date.now,
     required: true,
   },
 });
