@@ -1,11 +1,10 @@
 var express = require("express");
+const swaggerJSDoc = require("swagger-jsdoc");
 var api = require("../api");
-const drivingRecord = require("../schemas/drivingRecord");
-var DrivingRecord = require("../schemas/drivingRecord");
 var router = express.Router();
 
-// router.get("/", api.indexDrivingRecord);
-router.get("/:drivingId", api.showDrivingRecord);
-router.post("/:drivingId", api.storeDrivingRecord);
+router.get("/record", api.indexDrivingRecord);
+router.get("/record/:drivingId", api.showDrivingRecord);
+router.post("/record/:drivingId", api.storeDrivingRecord);
 
 module.exports = router;
