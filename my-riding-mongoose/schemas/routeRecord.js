@@ -4,23 +4,19 @@ const { Schema } = mongoose;
 const {
   Types: { ObjectId },
 } = Schema;
-const drivingRecordSchema = new Schema(
+const routeRecordSchema = new Schema(
   {
-    drivingId: {
+    routeId: {
       type: Number,
       required: true,
       unique: true,
     },
-    records: {
+    points: {
       type: Array,
       required: true,
     },
-    records: [
+    points: [
       {
-        date: {
-          type: Date,
-          required: true,
-        },
         latitude: {
           type: Number,
           required: true,
@@ -33,11 +29,7 @@ const drivingRecordSchema = new Schema(
           type: Number,
           required: true,
         },
-        speed: {
-          type: Number,
-          required: true,
-        },
-        drivingDistance: {
+        routeDistance: {
           type: Number,
           required: true,
         },
@@ -54,4 +46,4 @@ const drivingRecordSchema = new Schema(
   },
 );
 
-module.exports = mongoose.model("DrivingRecord", drivingRecordSchema);
+module.exports = mongoose.model("RouteRecord", routeRecordSchema);

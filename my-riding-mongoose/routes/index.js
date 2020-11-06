@@ -1,11 +1,19 @@
 var express = require("express");
 var api = require("../api");
-const drivingRecord = require("../schemas/drivingRecord");
-var DrivingRecord = require("../schemas/drivingRecord");
+
 var router = express.Router();
 
-// router.get("/", api.indexDrivingRecord);
-router.get("/:drivingId", api.showDrivingRecord);
-router.post("/:drivingId", api.storeDrivingRecord);
+/* GET home page. */
+router.get("/", function (req, res, next) {
+  res.render("index", { title: "Express" });
+});
+
+router.get("/record", api.indexDrivingRecord);
+router.get("/record/:drivingId", api.showDrivingRecord);
+router.post("/record/:drivingId", api.storeDrivingRecord);
+
+router.get("/route", api.indexRouteRecord);
+router.get("/route/:routeId", api.showRouteRecord);
+router.post("/route/:routeId", api.storeRouteRecord);
 
 module.exports = router;
