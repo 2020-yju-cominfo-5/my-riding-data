@@ -13,7 +13,7 @@ const storeDrivingRecord = async (req, res, next) => {
     .save()
     .then((result) => {
       console.log(result);
-      response(res, 201, "라이딩 정보 저장에 성공하였습니다.", result);
+      response(res, 201, "라이딩 기록 정보 저장에 성공하였습니다.", result);
     })
     .catch((err) => {
       console.log(err);

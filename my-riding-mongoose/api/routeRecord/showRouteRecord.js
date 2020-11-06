@@ -7,6 +7,9 @@ const showRouteRecord = async (req, res, next) => {
   })
     .then((routeRecord) => {
       console.log(routeRecord);
+      if (routeRecord.length === 0) {
+        response(res, 404, "등록되지 않은 경로입니다.");
+      }
       response(res, 200, "경로 정보 조회에 성공하였습니다.", routeRecord);
     })
     .catch((err) => {
