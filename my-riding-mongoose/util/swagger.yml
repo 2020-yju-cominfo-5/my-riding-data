@@ -1,0 +1,183 @@
+# API List
+tags:
+- name: "Driving records"
+  description: "라이딩 기록 정보를 관리"
+- name: "Router records"
+  description: "경로 정보를 관리"
+schemes:
+- "https"
+- "http"
+paths:
+  # <<-- Driving records
+  /record/{drivingId}:
+    get:
+      tags:
+      - "Driving records"
+      summary: "Id 로 라이딩 기록 정보 조회"
+      description: "drivingId 전송 시, 해당 Id 에 해당하는 라이딩 기록 세부정보(시간, 좌표, 고도, 속도, 누적 이동 거리)를 조회"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "drivingId"
+        in: "path"
+        description: "MySQL 에서 라이딩 기록 정보를 관리하는 drivingId"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "라이딩 기록 정보 조회에 성공하였습니다."
+          schema:
+            $ref: "#/definitions/drivingRecord"
+        "400":
+          description: "라이딩 기록 정보 조회에 실패하였습니다."
+        "404":
+          description: "등록되지 않은 라이딩 기록입니다."
+    post:
+      tags:
+      - "Driving records"
+      summary: "Id 로 라이딩 기록 정보 저장"
+      description: "라이딩 기록 세부정보(시간, 좌표, 고도, 속도, 누적 이동 거리)를 서버에 저장"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "drivingId"
+        in: "path"
+        description: "MySQL 에서 라이딩 기록 정보 저장 후, 획득한 drivingId"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "records"
+        in: "formData"
+        description: "시간대별로 기록된 라이딩 기록 세부정보(시간, 좌표, 고도, 속도, 누적 이동 거리)"
+        required: true
+        type: "Array"
+      responses:
+        "201": 
+          description: "라이딩 기록 정보 저장에 성공하였습니다."
+          schema:
+            $ref: "#/definitions/drivingRecord"
+        # "405":
+          # description: "라이딩 기록 정보 저장에 실패하였습니다."
+      # security:
+      # - petstore_auth:
+        # - "write:pets"
+        # - "read:pets"
+  # -->>
+
+  # <<-- Router records
+  /route/{routeId}:
+    get:
+      tags:
+      - "Router records"
+      summary: "Id 로 경로 정보 조회"
+      description: "routeId 전송 시, 해당 Id 에 해당하는 경로 세부정보(좌표, 고도, 누적 거리)를 조회"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "routeId"
+        in: "path"
+        description: "MySQL 경로 정보를 관리하는 routeId"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "경로 정보 조회에 성공하였습니다."
+          schema:
+            $ref: "#/definitions/routeRecord"
+        "400":
+          description: "경로 정보 조회에 실패하였습니다."
+        "404":
+          description: "등록되지 않은 경로입니다."
+    post:
+      tags:
+      - "Router records"
+      summary: "Id 로 경로 정보 저장"
+      description: "경로 세부정보(좌표, 고도, 누적 거리) 를 서버에 저장"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "routeId"
+        in: "path"
+        description: "MySQL 에서 경로 정보 저장 후, 획득한 routeId"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "records"
+        in: "formData"
+        description: "구간별로 생성된 경로 세부정보(좌표, 고도, 누적 거리)"
+        required: true
+        type: "Array"
+      responses:
+        "201": 
+          description: "경로 정보 저장에 성공하였습니다."
+          schema:
+            $ref: "#/definitions/routeRecord"
+        # "405":
+          # description: "라이딩 기록 정보 저장에 실패하였습니다."
+      # security:
+      # - petstore_auth:
+        # - "write:pets"
+        # - "read:pets"
+  # -->>
+
+# Shcema 정의
+definitions:
+  # <<-- drivingRecord
+  drivingRecord:
+    type: "object"
+    properties:
+      drivingId:
+        type: "Number"
+      records:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            date:
+              type: date
+            latitude:
+              type: "Number"
+            longitude:
+              type: "Number"
+            altitude:
+              type: "Number"
+            speed:
+              type: "Number"
+            drivingDistance:
+              type: "Number"
+      createdAt:
+        type: date
+
+  # -->>
+  # <<-- routeRecord
+  routeRecord:
+    type: "object"
+    properties:
+      routeId:
+        type: "Number"
+      points:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            latitude:
+              type: "Number"
+            longitude:
+              type: "Number"
+            altitude:
+              type: "Number"
+            routeDistance:
+              type: "Number"
+      createdAt:
+        type: date
+  # -->>
+
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
