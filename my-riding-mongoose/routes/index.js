@@ -7,43 +7,28 @@ var {
   showRouteRecord,
   storeRouteRecord,
 } = require("../api");
-const { param, body } = require("express-validator");
+const { getValidationRule } = require("../util");
 
 var router = express.Router();
-
-const getRule = {
-  id: (name) => {
-    return param(name).exists().trim().bail().isInt();
-  },
-  array: (name) => {
-    return body(name).exists().bail().isArray();
-  },
-  date: (name) => {
-    return body(name).exists().trim().bail().isBefore();
-  },
-  numeric: (name) => {
-    return body(name).exists().trim().bail().isNumeric();
-  },
-};
 
 const route = {
   drivingRecord: {
     index: { url: "/api/record" },
     show: {
       url: "/api/record/:drivingId",
-      rule: [getRule.id("drivingId")],
+      rule: [getValidationRule.id("drivingId")],
     },
     store: {
       url: "/api/record/:drivingId",
       rule: [
-        getRule.id("drivingId"),
-        getRule.array("records"),
-        getRule.date("records.*.date").isBefore(),
-        getRule.numeric("records.*.lat"),
-        getRule.numeric("records.*.lng"),
-        getRule.numeric("records.*.elevations"),
-        getRule.numeric("records.*.speed"),
-        getRule.numeric("records.*.distance"),
+        getValidationRule.id("drivingId"),
+        getValidationRule.array("records"),
+        getValidationRule.date("records.*.date").isBefore(),
+        getValidationRule.numeric("records.*.lat"),
+        getValidationRule.numeric("records.*.lng"),
+        getValidationRule.numeric("records.*.elevations"),
+        getValidationRule.numeric("records.*.speed"),
+        getValidationRule.numeric("records.*.distance"),
       ],
     },
   },
@@ -51,18 +36,18 @@ const route = {
     index: { url: "/api/route" },
     show: {
       url: "/api/route/:routeId",
-      rule: [getRule.id("routeId")],
+      rule: [getValidationRule.id("routeId")],
     },
     store: {
       url: "/api/route/:routeId",
       rule: [
-        getRule.id("routeId"),
-        getRule.array("points"),
-        getRule.numeric("points.*.lat"),
-        getRule.numeric("points.*.lng"),
-        getRule.numeric("points.*.elevations"),
-        getRule.numeric("points.*.speed"),
-        getRule.numeric("points.*.distance"),
+        getValidationRule.id("routeId"),
+        getValidationRule.array("points"),
+        getValidationRule.numeric("points.*.lat"),
+        getValidationRule.numeric("points.*.lng"),
+        getValidationRule.numeric("points.*.elevations"),
+        getValidationRule.numeric("points.*.speed"),
+        getValidationRule.numeric("points.*.distance"),
       ],
     },
   },
