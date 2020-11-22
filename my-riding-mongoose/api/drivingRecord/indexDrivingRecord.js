@@ -1,5 +1,5 @@
-var DrivingRecord = require("../../schemas/drivingRecord");
-var response = require("../../util/response");
+var DrivingRecord = require("../../models/drivingRecord");
+var { response } = require("../../util");
 
 const indexDrivingRecord = async (req, res, next) => {
   await DrivingRecord.find({})

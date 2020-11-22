@@ -32,4 +32,5 @@ module.exports = () => {
   });
 
   require("./drivingRecord");
+  require("./routeRecord");
 };

@@ -17,19 +17,19 @@ const routeRecordSchema = new Schema(
     },
     points: [
       {
-        latitude: {
+        lat: {
           type: Number,
           required: true,
         },
-        longitude: {
+        lng: {
           type: Number,
           required: true,
         },
-        altitude: {
+        elevations: {
           type: Number,
           required: true,
         },
-        routeDistance: {
+        distance: {
           type: Number,
           required: true,
         },

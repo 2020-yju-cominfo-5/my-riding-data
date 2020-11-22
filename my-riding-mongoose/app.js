@@ -5,7 +5,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
 var indexRouter = require("./routes/index");
-var connect = require("./schemas");
+var connect = require("./models");
 
 var swaggerDoc = require("./util/swaggerDoc");
 
