@@ -21,15 +21,15 @@ const drivingRecordSchema = new Schema(
           type: Date,
           required: true,
         },
-        latitude: {
+        lat: {
           type: Number,
           required: true,
         },
-        longitude: {
+        lng: {
           type: Number,
           required: true,
         },
-        altitude: {
+        elevations: {
           type: Number,
           required: true,
         },
@@ -37,7 +37,7 @@ const drivingRecordSchema = new Schema(
           type: Number,
           required: true,
         },
-        drivingDistance: {
+        distance: {
           type: Number,
           required: true,
         },

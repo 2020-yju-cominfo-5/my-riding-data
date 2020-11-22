@@ -1,10 +1,11 @@
-const drivingRecord = require("../../schemas/drivingRecord");
-var DrivingRecord = require("../../schemas/drivingRecord");
-var response = require("../../util/response");
+var DrivingRecord = require("../../models/drivingRecord");
+var { response, checkValidationResult } = require("../../util");
 
 const showDrivingRecord = async (req, res, next) => {
+  const { drivingId } = req.params;
+  checkValidationResult(req, res);
   await DrivingRecord.find({
-    drivingId: req.params.drivingId,
+    drivingId,
   })
     .then((drivingRecord) => {
       console.log(drivingRecord);

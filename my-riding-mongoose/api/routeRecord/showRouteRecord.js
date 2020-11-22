@@ -1,9 +1,11 @@
-var RouteRecord = require("../../schemas/routeRecord");
-var response = require("../../util/response");
+var RouteRecord = require("../../models/routeRecord");
+var { response, checkValidationResult } = require("../../util");
 
 const showRouteRecord = async (req, res, next) => {
+  const { routeId } = req.params;
+  checkValidationResult(req, res);
   await RouteRecord.find({
-    routeId: req.params.routeId,
+    routeId,
   })
     .then((routeRecord) => {
       console.log(routeRecord);
