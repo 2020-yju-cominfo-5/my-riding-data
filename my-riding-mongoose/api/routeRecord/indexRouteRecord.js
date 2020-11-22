@@ -1,5 +1,5 @@
-var RouteRecord = require("../../schemas/routeRecord");
-var response = require("../../util/response");
+var RouteRecord = require("../../models/routeRecord");
+var { response } = require("../../util");
 
 const indexRouteRecord = async (req, res, next) => {
   await RouteRecord.find({})

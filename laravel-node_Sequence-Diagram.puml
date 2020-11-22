@@ -1,0 +1,69 @@
+@startuml
+
+title laravel-node Sever
+
+actor App
+control laravel
+Database mySQL
+control express.js
+Database mongoDB
+
+activate App
+    App -> laravel : 라이딩 기록 전송
+
+    activate laravel
+
+        laravel -> mySQL : 라이딩 기록 저장 요청
+
+        note right
+        라이딩 날짜, 라이딩 점수
+        라이딩 제목, 출발지, 도착지 주소,
+        거리, 시간, 평균 / 최고 속도
+        end note
+
+        activate mySQL #skyblue
+            mySQL -[#skyblue]> mySQL : Insert Query
+            mySQL --> laravel : 라이딩 id 반환
+            alt 저장 실패 시
+                mySQL --> laravel : 저장 실패 메시지 전송
+        deactivate mySQL
+                laravel --> App : 저장 실패 메세지 전송
+                App -> App : 저장 재시도
+            end
+
+
+        laravel -> express.js : 라이딩 세부 기록 전송
+
+        activate express.js
+
+            express.js -> mongoDB : 라이딩 세부 기록 저장 요청
+
+            note left
+            라이딩 기록 id
+            시간별 라이딩 세부 기록
+            (위치 정보 / 속도 / 누적 이동 거리)
+            end note
+
+            activate mongoDB #green
+                mongoDB -[#green]> mongoDB : Document Query
+                mongoDB --> express.js : 저장 결과 반환
+            deactivate mongoDB
+
+            express.js --> laravel : 저장 결과 반환
+
+            alt 저장 실패 시
+                express.js --> laravel : 저장 실패 메시지 전송
+        deactivate express.js
+
+                laravel -> mySQL : 라이딩 기록 삭제 요청
+
+                activate mySQL #skyblue
+                mySQL -> mySQL : Delete Query
+                mySQL --> laravel : 삭제 결과 반환
+                deactivate mySQL
+            end
+
+        laravel --> App : 저장 결과 반환
+    deactivate laravel
+deactivate App
+@enduml
