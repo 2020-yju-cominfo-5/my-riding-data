@@ -3,9 +3,11 @@ var {
   // indexRouteRecord,
   showDrivingRecord,
   storeDrivingRecord,
+  destroyDrivingRecord,
   // indexDrivingRecord,
   showRouteRecord,
   storeRouteRecord,
+  destroyRouteRecord,
 } = require("../api");
 const { getValidationRule } = require("../util");
 
@@ -23,13 +25,15 @@ const route = {
       rule: [
         getValidationRule.id("drivingId"),
         getValidationRule.array("records"),
-        getValidationRule.date("records.*.date").isBefore(),
+        getValidationRule.date("records.*.date"),
         getValidationRule.numeric("records.*.lat"),
         getValidationRule.numeric("records.*.lng"),
-        getValidationRule.numeric("records.*.elevations"),
         getValidationRule.numeric("records.*.speed"),
-        getValidationRule.numeric("records.*.distance"),
       ],
+    },
+    destroy: {
+      url: "/api/record/:drivingId",
+      rule: [getValidationRule.id("drivingId")],
     },
   },
   routeRecord: {
@@ -45,10 +49,11 @@ const route = {
         getValidationRule.array("points"),
         getValidationRule.numeric("points.*.lat"),
         getValidationRule.numeric("points.*.lng"),
-        getValidationRule.numeric("points.*.elevations"),
-        getValidationRule.numeric("points.*.speed"),
-        getValidationRule.numeric("points.*.distance"),
       ],
+    },
+    destroy: {
+      url: "/api/record/:drivingId",
+      rule: [getValidationRule.id("drivingId")],
     },
   },
 };
@@ -69,6 +74,11 @@ router.post(
   route.drivingRecord.store.rule,
   storeDrivingRecord,
 );
+router.delete(
+  route.drivingRecord.destroy.url,
+  route.drivingRecord.destroy.rule,
+  destroyDrivingRecord,
+);
 
 // router.get(route.routeRecord.index, indexRouteRecord);
 router.get(
@@ -80,6 +90,11 @@ router.post(
   route.routeRecord.store.url,
   route.routeRecord.store.rule,
   storeRouteRecord,
+);
+router.delete(
+  route.routeRecord.destroy.url,
+  route.routeRecord.destroy.rule,
+  destroyRouteRecord,
 );
 
 module.exports = router;

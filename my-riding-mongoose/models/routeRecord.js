@@ -25,14 +25,6 @@ const routeRecordSchema = new Schema(
           type: Number,
           required: true,
         },
-        // elevations: {
-        //   type: Number,
-        //   required: true,
-        // },
-        // distance: {
-        //   type: Number,
-        //   required: true,
-        // },
       },
     ],
     createdAt: {
