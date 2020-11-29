@@ -52,8 +52,8 @@ const route = {
       ],
     },
     destroy: {
-      url: "/api/record/:drivingId",
-      rule: [getValidationRule.id("drivingId")],
+      url: "/api/route/:routeId",
+      rule: [getValidationRule.id("routeId")],
     },
   },
 };
