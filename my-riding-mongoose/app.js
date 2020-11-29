@@ -12,6 +12,11 @@ var swaggerDoc = require("./util/swaggerDoc");
 var app = express();
 connect();
 
+// Set Body Request Limit -> Error 413
+var bodyParser = require("body-parser");
+app.use(bodyParser.json({ limit: "2mb" }));
+app.use(bodyParser.urlencoded({ extended: true, limit: "2mb" }));
+
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
