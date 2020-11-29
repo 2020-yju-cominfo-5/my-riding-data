@@ -7,6 +7,9 @@ exports.showDrivingRecord = showDrivingRecord;
 
 const storeDrivingRecord = require("./drivingRecord/storeDrivingRecord");
 exports.storeDrivingRecord = storeDrivingRecord;
+
+const destroyDrivingRecord = require("./drivingRecord/destroyDrivingRecord");
+exports.destroyDrivingRecord = destroyDrivingRecord;
 // -->>
 
 // <<-- RouteRecord
@@ -18,4 +21,7 @@ exports.showRouteRecord = showRouteRecord;
 
 const storeRouteRecord = require("./routeRecord/storeRouteRecord");
 exports.storeRouteRecord = storeRouteRecord;
+
+const destroyRouteRecord = require("./routeRecord/destroyRouteRecord");
+exports.destroyRouteRecord = destroyRouteRecord;
 // -->>

@@ -3,9 +3,11 @@ var {
   // indexRouteRecord,
   showDrivingRecord,
   storeDrivingRecord,
+  destroyDrivingRecord,
   // indexDrivingRecord,
   showRouteRecord,
   storeRouteRecord,
+  destroyRouteRecord,
 } = require("../api");
 const { getValidationRule } = require("../util");
 
@@ -29,6 +31,10 @@ const route = {
         getValidationRule.numeric("records.*.speed"),
       ],
     },
+    destroy: {
+      url: "/api/record/:drivingId",
+      rule: [getValidationRule.id("drivingId")],
+    },
   },
   routeRecord: {
     index: { url: "/api/route" },
@@ -44,6 +50,10 @@ const route = {
         getValidationRule.numeric("points.*.lat"),
         getValidationRule.numeric("points.*.lng"),
       ],
+    },
+    destroy: {
+      url: "/api/record/:drivingId",
+      rule: [getValidationRule.id("drivingId")],
     },
   },
 };
@@ -64,6 +74,11 @@ router.post(
   route.drivingRecord.store.rule,
   storeDrivingRecord,
 );
+router.delete(
+  route.drivingRecord.destroy.url,
+  route.drivingRecord.destroy.rule,
+  destroyDrivingRecord,
+);
 
 // router.get(route.routeRecord.index, indexRouteRecord);
 router.get(
@@ -75,6 +90,11 @@ router.post(
   route.routeRecord.store.url,
   route.routeRecord.store.rule,
   storeRouteRecord,
+);
+router.delete(
+  route.routeRecord.destroy.url,
+  route.routeRecord.destroy.rule,
+  destroyRouteRecord,
 );
 
 module.exports = router;
